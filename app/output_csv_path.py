@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 from dataclasses import dataclass, astuple
 
 BASE_URL = "https://quotes.toscrape.com/"
-QUOTES_OUTPUT_CSV_PATH = "quotes.csv"
 QUOTES_FIELDS = ["text", "author", "tags"]
 
 
@@ -67,13 +66,14 @@ def get_quotes() -> [Quote]:
     return all_quotes
 
 
-def write_quotes_to_csv(quotes: [Quote]) -> None:
+def write_quotes_to_csv(quotes_output_csv_path: str, quotes: [Quote]) -> None:
     with open(
-            QUOTES_OUTPUT_CSV_PATH,
+            quotes_output_csv_path,
             "w",
             newline="",
             encoding="utf-8"
     ) as file:
         writer = csv.writer(file)
         writer.writerow(QUOTES_FIELDS)
-        writer.writerow([astuple(quote) for quote in quotes])
+        for quote in quotes:
+            writer.writerow(astuple(quote))
