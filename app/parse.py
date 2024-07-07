@@ -1,16 +1,12 @@
-from dataclasses import dataclass
+import output_csv_path
 
 
-@dataclass
-class Quote:
-    text: str
-    author: str
-    tags: list[str]
+def main():
+    quotes = output_csv_path.get_quotes()
 
-
-def main(output_csv_path: str) -> None:
-    pass
+    output_csv_path.write_quotes_to_csv(quotes)
+    print("Quotes have been written")
 
 
 if __name__ == "__main__":
-    main("quotes.csv")
+    main()
