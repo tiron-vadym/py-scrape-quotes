@@ -1,4 +1,4 @@
-import output_csv_path
+from app import output_csv_path
 
 
 def main() -> None:
